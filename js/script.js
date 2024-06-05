@@ -29,7 +29,16 @@ var lati = 0;
 var latitude  = 0;
 var longitude = 0;
 
-var apiKey = ""; //Your openweather api key
+var apiKey = "";
+
+getJSON();
+
+async function getJSON() {
+  const response = await fetch("openWeatherApiKey.json");
+  const json = await response.json();
+  apiKey = json.key;
+  console.log(json.key);
+}
 
 lang = lang.substring(0, 2);
 console.log("lang: " + lang);
