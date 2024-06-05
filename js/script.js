@@ -31,7 +31,7 @@ var longitude = 0;
 
 var apiKey = "";
 
-getJSON();
+getJSON(); //get the API KEY from a JSON file of format {"key":"(yourkey)"} named openWeatherApiKey.json (this file is untracked)
 
 async function getJSON() {
   const response = await fetch("openWeatherApiKey.json");
