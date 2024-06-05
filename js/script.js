@@ -29,6 +29,8 @@ var lati = 0;
 var latitude  = 0;
 var longitude = 0;
 
+var apiKey = ""; //Your openweather api key
+
 lang = lang.substring(0, 2);
 console.log("lang: " + lang);
 
@@ -37,7 +39,7 @@ console.log("lang: " + lang);
 checkwthr();
 
 function checkwthr(){
-  fetch('http://api.openweathermap.org/data/2.5/weather?q=' + /*inputValue.value*/ inputValue + '&units=metric&lang=' + lang + '&appid=86fd47dba861b4b040377dce3a28a1de')
+  fetch('http://api.openweathermap.org/data/2.5/weather?q=' + /*inputValue.value*/ inputValue + '&units=metric&lang=' + lang + '&appid=' + apiKey)
     .then(response => response.json())
     .then(data => {
       console.log(data);
