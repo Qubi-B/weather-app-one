@@ -31,14 +31,19 @@ var longitude = 0;
 
 var apiKey = "";
 
-getJSON(); //get the API KEY from a JSON file of format {"key":"(yourkey)"} named openWeatherApiKey.json (this file is untracked)
+//get the API KEY from a JSON file of format {"key":"(yourkey)"} named openWeatherApiKey.json (this file is untracked)
+//this is code from the internet and I have no idea what is going on until like line 50. 
 
-async function getJSON() {
-  const response = await fetch("openWeatherApiKey.json");
-  const json = await response.json();
-  apiKey = json.key;
-  console.log(json.key);
+function getApiKey() {
+  return fetch("http://localhost/js/openWeatherApiKey.json")
+   .then(response => response.json())
+   .then(data => data.key);
 }
+
+getApiKey().then(apiKey => {
+  // you can also assign it to a global variable
+  window.apiKey = apiKey;
+});
 
 lang = lang.substring(0, 2);
 console.log("lang: " + lang);
@@ -48,10 +53,10 @@ console.log("lang: " + lang);
 checkwthr();
 
 function checkwthr(){
-  fetch('http://api.openweathermap.org/data/2.5/weather?q=' + /*inputValue.value*/ inputValue + '&units=metric&lang=' + lang + '&appid=' + apiKey)
+  //oh my god this shit works
+  getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/weather?q=' + /*inputValue.value*/ inputValue + '&units=metric&lang=' + lang + '&appid=' + apiKey))
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       var nameVal = data['name'];
       var tempVal = data['main']['temp'];
       var descVal = data['weather'][0]['description'];
@@ -77,23 +82,13 @@ function checkwthr(){
 
     .then(response => {0})
 
-    console.log(lati);
-    console.log(long);
-
-    fetch('http://api.openweathermap.org/data/2.5/air_pollution?lat=' + lati + '&lon=' + long + '&units=metric&appid=86fd47dba861b4b040377dce3a28a1de')
-
+    //OH MY GOD THIS IS WORKING
+    getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/air_pollution?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
       .then(response => response.json())
       .then(data => {
-
-        console.log('http://api.openweathermap.org/data/2.5/air_pollution?lat=' + lati + '&lon=' + long + '&units=metric&appid=86fd47dba861b4b040377dce3a28a1de')
-        console.log(lati);
-        console.log(long);
-        console.log(data);
-
         var aqiVal = data['list'][0]['main']['aqi'];
         var pm25Val = data['list'][0]['components']['pm2_5'];
         var pm10Val = data['list'][0]['components']['pm10'];
-
 
         aqi.innerHTML = aqiVal;
         pm10.innerHTML = pm10Val;
