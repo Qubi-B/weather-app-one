@@ -87,7 +87,6 @@ function checkwthr(){
     getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
       .then(response => response.json())
       .then(data => {
-        console.log('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey);
         //generate the table
         forecTableStagedContent += "<table>";
         for(i = 1; i < 40; i++){
@@ -95,7 +94,6 @@ function checkwthr(){
           forecTableStagedContent += "<tr>";
           forecTableStagedContent += "<td>" + data['list'][i]['dt_txt'] + "</td>";
           forecTableStagedContent += "<td>" + data['list'][i]['weather'][0]['icon'] + "</td>";
-          forecTableStagedContent += "<td>" + data['list'][i]['main']['temp_min'] + "</td>";
           forecTableStagedContent += "<td>" + data['list'][i]['main']['temp_max'] + "</td>";
           forecTableStagedContent += "</tr>";
         }
