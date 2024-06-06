@@ -21,6 +21,7 @@ var lonCls = document.querySelector('.lon'); //air quality
 
 //forecast
 var forecTable = document.querySelector('.forecast-generate');
+var forecTableStagedContent = "";
 
 var long = 0;
 var lati = 0;
@@ -82,54 +83,23 @@ function checkwthr(){
 
       .then(response => {0})
 
-    forecTable.innerHTML += "<table>"
     //FORECAST
     getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
       .then(response => response.json())
       .then(data => {
         console.log('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey);
-        
+        //generate the table
+        forecTableStagedContent += "<table>";
         for(i = 1; i < 40; i++){
-          //get each day separately, but in a loop so that we save some code and it looks better
-          //hour_name = document.querySelector('.hour_name_' + i.toString());
-          //hour_icon = document.querySelector('.hour_icon_' + i.toString());
-          //hour_temp_min = document.querySelector('.hour_temp_min_' + i.toString());
-          //hour_temp_max = document.querySelector('.hour_temp_max_' + i.toString());
-
           //generate the table row
-          forecTable.innerHTML += "<tr>"
-
-          forecTable.innerHTML += "<td>" + data['list'][i]['dt_txt'] + "</td>";
-          forecTable.innerHTML += "<td>" + data['list'][i]['weather'][0]['icon'] + "</td>";
-          forecTable.innerHTML += "<td>" + data['list'][i]['main']['temp_min'] + "</td>";
-          forecTable.innerHTML += "<td>" + data['list'][i]['main']['temp_max'] + "</td>";
-
-          forecTable.innerHTML += "</tr>"
-
-          /*day_name.innerHTML = data['list'][0 + i*8]['dt_txt'];
-          //calc max temp for the day
-          var tmp_maxTempDay = 0;
-          for(j = 0; j < 8; j++){
-            if(data['list'][j + i * 8]['main']['temp_max'] > tmp_maxTempDay){
-              tmp_maxTempDay = data['list'][j + i * 8]['main']['temp_max'];
-            }
-          }
-          day_temp_max.innerHTML = tmp_maxTempDay;
-
-          //calc min temp for the day
-          var tmp_minTempDay = 100;
-          for(j = 0; j < 8; j++){
-            if(data['list'][j + i * 8]['main']['temp_min'] < tmp_minTempDay){
-              tmp_minTempDay = data['list'][j + i * 8]['main']['temp_min'];
-            }
-          }
-          day_temp_min.innerHTML = tmp_minTempDay;
-          */
-
+          forecTableStagedContent += "<tr>";
+          forecTableStagedContent += "<td>" + data['list'][i]['dt_txt'] + "</td>";
+          forecTableStagedContent += "<td>" + data['list'][i]['weather'][0]['icon'] + "</td>";
+          forecTableStagedContent += "<td>" + data['list'][i]['main']['temp_min'] + "</td>";
+          forecTableStagedContent += "<td>" + data['list'][i]['main']['temp_max'] + "</td>";
+          forecTableStagedContent += "</tr>";
         }
-        
+        forecTableStagedContent.innerHTML += "</table>";
+        forecTable.innerHTML = forecTableStagedContent;
       })
-      forecTable.innerHTML += "</table>"
-
-  
 };
