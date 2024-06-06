@@ -24,10 +24,11 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Kubusweather</title>
-    <link rel="stylesheet" href="master.css">
+    <title>Weather-app-one</title>
+    <link rel="stylesheet" href="css/master.css">
   </head>
   <body>
+    <h1>Current data:</h1>
     <p>Status: <span class="name"></span></p>
     <p>Description: <span class="desc"></span></p>
     <p>Temperature: <span class="temp"></span></p>
@@ -35,12 +36,22 @@
     <p>Pressure: <span class="pres"></span></p>
     <p>Wind speed: <span class="wspd"></span></p>
     <p>Wind angle: <span class="wang"></span></p>
+  
+    <h1>Air Quality:</h1>
     <p>AQI: <span class="aqi"></span></p>
     <p>PM<sub>10</sub>: <span class="pm10"></span></p>
     <p>PM<sub>2.5</sub>: <span class="pm25"></span></p>
+
+    <h1>3-hour forecast:</h1>
+    <table class="forecast-generate">
+
+    </table>
+
+    <h1>Other data:</h1>
     <p>Latitude: <span class="lat"></span></p>
     <p>Longitude: <span class="lon"></span></p>
   </body>
-
   <script src="js\script.js"></script>
+  <script src="js\main.js"></script>
+  <!-- <script src="writecode.js"></script> -->
 </html>

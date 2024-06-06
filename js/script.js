@@ -1,10 +1,6 @@
-function convert_to_float(a) {
-        var floatValue = +(a);
-        return floatValue;
-    }
-
+//init all basic variables needed
 var button = document.querySelector('.button');
-var inputValue = "Kielce"//document.querySelector('.inputValue');
+var inputValue = "Kielce"; //document.querySelector('.inputValue');
 var lang   = navigator.language || navigator.userLanguage;
 
 var name   = document.querySelector('.name'); //city name
@@ -23,6 +19,9 @@ var pm25   = document.querySelector('.pm25'); //pm25
 var latCls = document.querySelector('.lat'); //air quality
 var lonCls = document.querySelector('.lon'); //air quality
 
+//forecast
+var forecTable = document.querySelector('.forecast-generate');
+
 var long = 0;
 var lati = 0;
 
@@ -31,28 +30,11 @@ var longitude = 0;
 
 var apiKey = "";
 
-//get the API KEY from a JSON file of format {"key":"(yourkey)"} named openWeatherApiKey.json (this file is untracked)
-//this is code from the internet and I have no idea what is going on until like line 50. 
-
-function getApiKey() {
-  return fetch("http://localhost/js/openWeatherApiKey.json")
-   .then(response => response.json())
-   .then(data => data.key);
-}
-
-getApiKey().then(apiKey => {
-  // you can also assign it to a global variable
-  window.apiKey = apiKey;
-});
-
 lang = lang.substring(0, 2);
 console.log("lang: " + lang);
 
-//button.addEventListener('click', function(){
-
-checkwthr();
-
 function checkwthr(){
+  //CURRENT WEATHER
   //oh my god this shit works
   getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/weather?q=' + /*inputValue.value*/ inputValue + '&units=metric&lang=' + lang + '&appid=' + apiKey))
     .then(response => response.json())
@@ -82,6 +64,7 @@ function checkwthr(){
 
     .then(response => {0})
 
+    //CURRENT AIR QUALITY
     //OH MY GOD THIS IS WORKING
     getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/air_pollution?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
       .then(response => response.json())
@@ -95,5 +78,58 @@ function checkwthr(){
         pm25.innerHTML = pm25Val;
       })
 
-  .catch(err => alert('"' + inputValue.value + '" is not a valid city name'))
-}
+      .catch(err => alert('"' + inputValue.value + '" is not a valid city name'))
+
+      .then(response => {0})
+
+    forecTable.innerHTML += "<table>"
+    //FORECAST
+    getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
+      .then(response => response.json())
+      .then(data => {
+        console.log('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey);
+        
+        for(i = 1; i < 40; i++){
+          //get each day separately, but in a loop so that we save some code and it looks better
+          //hour_name = document.querySelector('.hour_name_' + i.toString());
+          //hour_icon = document.querySelector('.hour_icon_' + i.toString());
+          //hour_temp_min = document.querySelector('.hour_temp_min_' + i.toString());
+          //hour_temp_max = document.querySelector('.hour_temp_max_' + i.toString());
+
+          //generate the table row
+          forecTable.innerHTML += "<tr>"
+
+          forecTable.innerHTML += "<td>" + data['list'][i]['dt_txt'] + "</td>";
+          forecTable.innerHTML += "<td>" + data['list'][i]['weather'][0]['icon'] + "</td>";
+          forecTable.innerHTML += "<td>" + data['list'][i]['main']['temp_min'] + "</td>";
+          forecTable.innerHTML += "<td>" + data['list'][i]['main']['temp_max'] + "</td>";
+
+          forecTable.innerHTML += "</tr>"
+
+          /*day_name.innerHTML = data['list'][0 + i*8]['dt_txt'];
+          //calc max temp for the day
+          var tmp_maxTempDay = 0;
+          for(j = 0; j < 8; j++){
+            if(data['list'][j + i * 8]['main']['temp_max'] > tmp_maxTempDay){
+              tmp_maxTempDay = data['list'][j + i * 8]['main']['temp_max'];
+            }
+          }
+          day_temp_max.innerHTML = tmp_maxTempDay;
+
+          //calc min temp for the day
+          var tmp_minTempDay = 100;
+          for(j = 0; j < 8; j++){
+            if(data['list'][j + i * 8]['main']['temp_min'] < tmp_minTempDay){
+              tmp_minTempDay = data['list'][j + i * 8]['main']['temp_min'];
+            }
+          }
+          day_temp_min.innerHTML = tmp_minTempDay;
+          */
+
+        }
+        
+      })
+      forecTable.innerHTML += "</table>"
+
+  
+};
