@@ -26,10 +26,13 @@
     <meta charset="utf-8">
     <title>Kubusweather</title>
     <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/forec.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   </head>
   <body>
     <div class="top">
@@ -37,28 +40,38 @@
       <p><img src="" alt="" class="curr_icon">&nbsp&nbsp&nbsp<span class="temp"></span></p>
       <p><span class="desc"></span></p>
       <div class="data_small">
-        <p>AQI: <span class="aqi"></span></p>
-        <p>Humidity: <span class="humi"></span></p>
-        <p>Pressure: <span class="pres"></span></p>
+        <p>Air: <span class="aqi"></span></p>
       </div>
     </div>
     <div class="forecast">
       <table class="forecast-generate">
+        <tr>
+          <td>Downloading forecast, please wait...</td>
+        </tr>
       </table>
     </div>
+    <div class="data_small">
+      <p>Humidity: <span class="humi"></span></p>
+      <p>Pressure: <span class="pres"></span></p>
+      <p>Wind speed: <span class="wspd"></span></p>
+      <p>Wind angle: <span class="wang"></span></p>
+      <p>PM<sub>10</sub>: <span class="pm10"></span></p>
+      <p>PM<sub>2.5</sub>: <span class="pm25"></span></p>
+      <p>Latitude: <span class="lat"></span></p>
+      <p>Longitude: <span class="lon"></span></p>
+    </div>
     
+    <!--
     
-    <p>Wind speed: <span class="wspd"></span></p>
-    <p>Wind angle: <span class="wang"></span></p>
   
     <h1>Air Quality:</h1>
     
-    <p>PM<sub>10</sub>: <span class="pm10"></span></p>
-    <p>PM<sub>2.5</sub>: <span class="pm25"></span></p>
+    
 
     <h1>Other data:</h1>
-    <p>Latitude: <span class="lat"></span></p>
-    <p>Longitude: <span class="lon"></span></p>
+    
+    -->
+    <p class="credits">Built with ❤️ by <a href="https://github.com/Qubi-B">Jakub Barszcz</a>.<br>Github: <a href="https://github.com/Qubi-B/weather-app-one">Qubi-B/weather-app-one</a></p>
   </body>
   <script src="js\script.js"></script>
   <script src="js\main.js"></script>

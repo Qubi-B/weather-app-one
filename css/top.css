@@ -1,0 +1,39 @@
+.top p{
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.774);
+    text-align: center;
+  }
+  
+  .top > p > .name{
+    font-size: 5rem;
+  }
+  
+  .top > p > .temp{
+    font-size: 15rem;
+    vertical-align: middle;
+  }
+  
+  .top > p > .desc{
+    font-size: 5rem;
+    text-transform: capitalize;
+  }
+  
+  .top > p > .curr_icon{
+    height: 15rem;
+    vertical-align: middle;
+  }
+  
+.data_small > p{
+    background-color: rgb(38, 38, 38);
+    width: auto;
+    padding: 1.5vh;
+    border: 2px solid rgb(38, 38, 38);
+    border-radius: 30px;
+    /*display: inline-block;*/
+    font-size: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .data_small{
+    width: fit-content;
+    margin: auto;
+  }

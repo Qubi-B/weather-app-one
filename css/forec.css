@@ -1,0 +1,55 @@
+.forecast{
+    width: fit-content;
+    margin: auto;
+}
+
+
+.forecast-generate{
+    background-color: rgb(38, 38, 38);
+    border-radius: 30px;
+    padding: 2vh;
+    width: 90vw;
+}
+
+.forecast-generate p{
+    vertical-align: middle;
+}
+
+.forecast-generate td{
+    font-size: 4rem;
+
+}
+
+.forecast-generate img{
+    height: 4vh;
+}
+button{
+    color: white;
+    text-align: center;
+    background-color: rgb(52, 52, 52);
+    border: 2px solid transparent;
+    border-radius: 5px;
+    padding: 1vh;
+    font-size: 2.5vh;
+    cursor: pointer;
+    transition: .5s;
+}
+button:hover{
+    color: white;
+    background-color: rgb(82, 82, 82);
+    border: 2px solid transparent;
+    border-radius: 5px;
+    padding: 1vh;
+    font-size: 2.5vh;
+}
+.align-center-td{
+    text-align: center;
+}
+.table-header{
+    text-align: center;
+    font-size: 3rem !important;
+    vertical-align: middle;
+}
+.table-breaker{
+    font-size: 0.5rem;
+}

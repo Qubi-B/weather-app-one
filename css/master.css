@@ -1,13 +1,9 @@
-:root {
-  --primary-color: #fff;
-  --secondary-color: #bbb;
-}
-
 html, head, body {
   margin: 0;
   padding: 0;
   border: 0;
   min-height: 100%;
+  color: white;
   background: rgb(24, 24, 24);
   background-position: center;
   background-repeat: no-repeat;
@@ -41,39 +37,23 @@ html, head, body {
   box-shadow: 5px 5px 20px var(--secondary-color);
 }
 
-.top p{
+.material-symbols-outlined {
+  vertical-align: middle;
+  font-size: 3rem !important;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.credits{
   color: white;
-  text-shadow: 0 0 20px rgba(0, 0, 0, 0.774);
   text-align: center;
 }
-
-.top > p > .name{
-  font-size: 3vh;
+.credits a:link{
+  color: rgb(121, 121, 255);
 }
-
-.top > p > .temp{
-  font-size: 8vh;
-  vertical-align: middle;
-}
-
-.top > p > .desc{
-  font-size: 3vh;
-  text-transform: capitalize;
-}
-
-.top > p > .curr_icon{
-  height: 5vh;
-  vertical-align: middle;
-}
-
-.top > .data_small > p{
-  background-color: rgb(38, 38, 38);
-  width: auto;
-  padding: 1.5vh;
-  border-radius: 15px;
-  display: inline-block;
-}
-.data_small{
-  width: fit-content;
-  margin: auto;
+.credits a:visited{
+  color: rgb(121, 121, 255);
 }

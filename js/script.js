@@ -58,10 +58,12 @@ function checkwthr(){
       icon.src = "png/" + data['weather'][0]['icon'] + ".png"; //icons\01d.svg
       desc.innerHTML = descVal;
       temp.innerHTML = Math.round(tempVal*1) + "°";
-      humi.innerHTML = Math.round(humiVal);
-      pres.innerHTML = Math.round(presVal);
+      humi.innerHTML = Math.round(humiVal) + "%";
+      pres.innerHTML = Math.round(presVal) + "hPa";
       wspd.innerHTML = wspdVal;
       wang.innerHTML = wangVal;
+
+      //humi.parentElement.style.borderColor = "rgb(0, 115, 255)"
 
       latCls.innerHTML = lati;
       lonCls.innerHTML = long;
@@ -74,11 +76,21 @@ function checkwthr(){
     getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/air_pollution?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
       .then(response => response.json())
       .then(data => {
+        var aqiRead = "";
+        var aqiColor = "";
         var aqiVal = data['list'][0]['main']['aqi'];
         var pm25Val = data['list'][0]['components']['pm2_5'];
         var pm10Val = data['list'][0]['components']['pm10'];
 
-        aqi.innerHTML = aqiVal;
+        if(aqiVal == 1){aqiRead = "Good"; aqiColor = "greenyellow";}
+        if(aqiVal == 2){aqiRead = "Mid"; aqiColor = "green";}
+        if(aqiVal == 3){aqiRead = "Moderate"; aqiColor = "yellow";}
+        if(aqiVal == 4){aqiRead = "Bad"; aqiColor = "orange";}
+        if(aqiVal == 5){aqiRead = "Very Bad"; aqiColor = "red";}
+
+
+        aqi.innerHTML = aqiRead;
+        aqi.parentElement.style.borderColor = aqiColor;
         pm10.innerHTML = pm10Val;
         pm25.innerHTML = pm25Val;
       })
@@ -88,20 +100,57 @@ function checkwthr(){
       .then(response => {0})
 };
 
-function getForecast(){
+function getForecastPrintSmallTable(){
+  forecTableStagedContent = "";
+  forecTable.innerHTML = "Loading...";
+
   getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
       .then(response => response.json())
       .then(data => {
         //generate the table
         forecTableStagedContent += "<table>";
+        forecTableStagedContent += "<tr>";
+        forecTableStagedContent += "<td class='table-header' colspan='3'><span class='material-symbols-outlined'>calendar_month</span>&nbsp3-Hour/5-day Forecast</td>";
+        forecTableStagedContent += "</tr>";
+        for(i = 0; i < 8; i++){
+          //generate the table row
+          forecTableStagedContent += "<tr>";
+          forecTableStagedContent += "<td style='text-align: center'>" + (data['list'][i]['dt_txt']).slice(8, 16) + "</td>";
+          forecTableStagedContent += "<td style='text-align: right'><img src='png/" + data['list'][i]['weather'][0]['icon'] + ".png' alt=''></td>";
+          forecTableStagedContent += "<td>" + Math.round(parseFloat(data['list'][i]['main']['temp']))  + "°C" + "</td>";
+          forecTableStagedContent += "</tr>";
+        }
+        forecTableStagedContent += "<tr>";
+        forecTableStagedContent += "<td class='align-center-td' colspan='3'><button onclick='getForecastPrintFullTable()'>Show more ↓</button></td>";
+        forecTableStagedContent += "</tr>";
+        forecTableStagedContent += "</table>";
+        forecTable.innerHTML = forecTableStagedContent;
+      })
+}
+
+function getForecastPrintFullTable(){
+  forecTableStagedContent = "";
+  forecTable.innerHTML = "Loading...";
+  
+  getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
+      .then(response => response.json())
+      .then(data => {
+        //generate the table
+        forecTableStagedContent += "<table>";
+        forecTableStagedContent += "<tr>";
+        forecTableStagedContent += "<td class='table-header' colspan='3'><span class='material-symbols-outlined'>calendar_month</span>&nbsp3-Hour/5-day Forecast</td>";
+        forecTableStagedContent += "</tr>";
         for(i = 0; i < 40; i++){
           //generate the table row
           forecTableStagedContent += "<tr>";
-          forecTableStagedContent += "<td>" + data['list'][i]['dt_txt'] + "</td>";
-          forecTableStagedContent += "<td>" + data['list'][i]['weather'][0]['icon'] + "</td>";
-          forecTableStagedContent += "<td>" + data['list'][i]['main']['temp'] + "</td>";
+          forecTableStagedContent += "<td style='text-align: center'>" + (data['list'][i]['dt_txt']).slice(8, 16) + "</td>";
+          forecTableStagedContent += "<td style='text-align: right'><img src='png/" + data['list'][i]['weather'][0]['icon'] + ".png' alt=''></td>";
+          forecTableStagedContent += "<td>" + Math.round(parseFloat(data['list'][i]['main']['temp']))  + "°C" + "</td>";
           forecTableStagedContent += "</tr>";
         }
+        forecTableStagedContent += "<tr>";
+        forecTableStagedContent += "<td class='align-center-td' colspan='3'><button onclick='getForecastPrintSmallTable()'>Show less ↑</button></td>";
+        forecTableStagedContent += "</tr>";
         forecTableStagedContent.innerHTML += "</table>";
         forecTable.innerHTML = forecTableStagedContent;
       })
