@@ -16,5 +16,9 @@ getApiKey().then(apiKey => {
 checkwthr();
 //});
 
+setTimeout(() => {
+    getForecast()
+}, 500);
+
 //Then check it every 30 cumulative seconds the user is looking at the page
 //TO-DO

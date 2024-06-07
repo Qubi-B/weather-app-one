@@ -82,22 +82,23 @@ function checkwthr(){
       .catch(err => alert('"' + inputValue.value + '" is not a valid city name'))
 
       .then(response => {0})
+};
 
-    //FORECAST
-    getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
+function getForecast(){
+  getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
       .then(response => response.json())
       .then(data => {
         //generate the table
         forecTableStagedContent += "<table>";
-        for(i = 1; i < 40; i++){
+        for(i = 0; i < 40; i++){
           //generate the table row
           forecTableStagedContent += "<tr>";
           forecTableStagedContent += "<td>" + data['list'][i]['dt_txt'] + "</td>";
           forecTableStagedContent += "<td>" + data['list'][i]['weather'][0]['icon'] + "</td>";
-          forecTableStagedContent += "<td>" + data['list'][i]['main']['temp_max'] + "</td>";
+          forecTableStagedContent += "<td>" + data['list'][i]['main']['temp'] + "</td>";
           forecTableStagedContent += "</tr>";
         }
         forecTableStagedContent.innerHTML += "</table>";
         forecTable.innerHTML = forecTableStagedContent;
       })
-};
+}
