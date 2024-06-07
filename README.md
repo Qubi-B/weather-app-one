@@ -1,8 +1,17 @@
 # A PWA weather app (work-in-progress)
 ## Introduction
-This project's goal is to create a functioning no-ads, no-tracking PWA for weather. Personally, as an iPhone user I was surprised there was no good android weather app (from my small experience with someone else's phone).
-That's why I have decided to make a cool weather app, working on both desktop and mobile. 
-The app is set to be a PWA (Progressive Web App), which will make it possible to be added directly to your homescreen, and function as a native app. 
+<table>
+<tr>
+  <td>
+    This project's goal is to create a functioning no-ads, no-tracking PWA for weather. Personally, as an iPhone user I was surprised there was no good android weather app (from my small experience with someone else's phone).
+    That's why I have decided to make a cool weather app, working on both desktop and mobile. 
+    The app is set to be a PWA (Progressive Web App), which will make it possible to be added directly to your homescreen, and function as a native app. 
+  </td>
+  <td>
+    <img src="https://github.com/Qubi-B/weather-app-one/blob/NewUI/png/screenshot.jpg?raw=true">
+  </td>
+</tr>
+</table>
 
 > [!NOTE]
 > This is _**still a work in progress**_. The software is not usable yet.
