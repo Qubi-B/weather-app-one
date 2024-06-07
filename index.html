@@ -26,25 +26,35 @@
     <meta charset="utf-8">
     <title>Kubusweather</title>
     <link rel="stylesheet" href="css/master.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <h1>Current data:</h1>
-    <p>Status: <span class="name"></span></p>
-    <p>Description: <span class="desc"></span></p>
-    <p>Temperature: <span class="temp"></span></p>
-    <p>Humidity: <span class="humi"></span></p>
-    <p>Pressure: <span class="pres"></span></p>
+    <div class="top">
+      <p><span class="name"></span></p>
+      <p><img src="" alt="" class="curr_icon">&nbsp&nbsp&nbsp<span class="temp"></span></p>
+      <p><span class="desc"></span></p>
+      <div class="data_small">
+        <p>AQI: <span class="aqi"></span></p>
+        <p>Humidity: <span class="humi"></span></p>
+        <p>Pressure: <span class="pres"></span></p>
+      </div>
+    </div>
+    <div class="forecast">
+      <table class="forecast-generate">
+      </table>
+    </div>
+    
+    
     <p>Wind speed: <span class="wspd"></span></p>
     <p>Wind angle: <span class="wang"></span></p>
   
     <h1>Air Quality:</h1>
-    <p>AQI: <span class="aqi"></span></p>
+    
     <p>PM<sub>10</sub>: <span class="pm10"></span></p>
     <p>PM<sub>2.5</sub>: <span class="pm25"></span></p>
-
-    <h1>3-hour forecast:</h1>
-    <table class="forecast-generate">
-    </table>
 
     <h1>Other data:</h1>
     <p>Latitude: <span class="lat"></span></p>

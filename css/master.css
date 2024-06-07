@@ -7,9 +7,15 @@ html, head, body {
   margin: 0;
   padding: 0;
   border: 0;
-  height: 100%;
-  width: 100%;
-  background: #fff;
+  min-height: 100%;
+  background: rgb(24, 24, 24);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
 .main {
@@ -33,4 +39,41 @@ html, head, body {
   border-radius: 15px;
   margin: 5px 5px;
   box-shadow: 5px 5px 20px var(--secondary-color);
+}
+
+.top p{
+  color: white;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.774);
+  text-align: center;
+}
+
+.top > p > .name{
+  font-size: 3vh;
+}
+
+.top > p > .temp{
+  font-size: 8vh;
+  vertical-align: middle;
+}
+
+.top > p > .desc{
+  font-size: 3vh;
+  text-transform: capitalize;
+}
+
+.top > p > .curr_icon{
+  height: 5vh;
+  vertical-align: middle;
+}
+
+.top > .data_small > p{
+  background-color: rgb(38, 38, 38);
+  width: auto;
+  padding: 1.5vh;
+  border-radius: 15px;
+  display: inline-block;
+}
+.data_small{
+  width: fit-content;
+  margin: auto;
 }

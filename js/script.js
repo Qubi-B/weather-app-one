@@ -3,7 +3,8 @@ var button = document.querySelector('.button');
 var inputValue = "Kielce"; //document.querySelector('.inputValue');
 var lang   = navigator.language || navigator.userLanguage;
 
-var name   = document.querySelector('.name'); //city name
+var icon   = document.querySelector('.curr_icon'); //current icon
+var cityname   = document.querySelector('.name'); //city name
 var desc   = document.querySelector('.desc'); //weather description
 var temp   = document.querySelector('.temp'); //temperature
 var humi   = document.querySelector('.humi'); //humidity
@@ -40,6 +41,7 @@ function checkwthr(){
   getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/weather?q=' + /*inputValue.value*/ inputValue + '&units=metric&lang=' + lang + '&appid=' + apiKey))
     .then(response => response.json())
     .then(data => {
+      console.log('http://api.openweathermap.org/data/2.5/weather?q=' + /*inputValue.value*/ inputValue + '&units=metric&lang=' + lang + '&appid=' + apiKey)
       var nameVal = data['name'];
       var tempVal = data['main']['temp'];
       var descVal = data['weather'][0]['description'];
@@ -51,13 +53,15 @@ function checkwthr(){
       long = data['coord']['lon'];
       lati = data['coord']['lat'];
 
-      name.innerHTML = nameVal;
+
+      cityname.innerHTML = nameVal;
+      icon.src = "png/" + data['weather'][0]['icon'] + ".png"; //icons\01d.svg
       desc.innerHTML = descVal;
-      temp.innerHTML = Math.round(tempVal*1) + " °C";
-      humi.innerHTML = Math.round(humiVal) +    " %";
-      pres.innerHTML = Math.round(presVal) +  " hPa";
-      wspd.innerHTML = wspdVal +             " km/h";
-      wang.innerHTML = wangVal +                " °";
+      temp.innerHTML = Math.round(tempVal*1) + "°";
+      humi.innerHTML = Math.round(humiVal);
+      pres.innerHTML = Math.round(presVal);
+      wspd.innerHTML = wspdVal;
+      wang.innerHTML = wangVal;
 
       latCls.innerHTML = lati;
       lonCls.innerHTML = long;
