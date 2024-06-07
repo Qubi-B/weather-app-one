@@ -1,10 +1,6 @@
-function convert_to_float(a) {
-        var floatValue = +(a);
-        return floatValue;
-    }
-
+//init all basic variables needed
 var button = document.querySelector('.button');
-var inputValue = "Kielce"//document.querySelector('.inputValue');
+var inputValue = "Kielce"; //document.querySelector('.inputValue');
 var lang   = navigator.language || navigator.userLanguage;
 
 var name   = document.querySelector('.name'); //city name
@@ -23,6 +19,10 @@ var pm25   = document.querySelector('.pm25'); //pm25
 var latCls = document.querySelector('.lat'); //air quality
 var lonCls = document.querySelector('.lon'); //air quality
 
+//forecast
+var forecTable = document.querySelector('.forecast-generate');
+var forecTableStagedContent = "";
+
 var long = 0;
 var lati = 0;
 
@@ -31,28 +31,11 @@ var longitude = 0;
 
 var apiKey = "";
 
-//get the API KEY from a JSON file of format {"key":"(yourkey)"} named openWeatherApiKey.json (this file is untracked)
-//this is code from the internet and I have no idea what is going on until like line 50. 
-
-function getApiKey() {
-  return fetch("http://localhost/js/openWeatherApiKey.json")
-   .then(response => response.json())
-   .then(data => data.key);
-}
-
-getApiKey().then(apiKey => {
-  // you can also assign it to a global variable
-  window.apiKey = apiKey;
-});
-
 lang = lang.substring(0, 2);
 console.log("lang: " + lang);
 
-//button.addEventListener('click', function(){
-
-checkwthr();
-
 function checkwthr(){
+  //CURRENT WEATHER
   //oh my god this shit works
   getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/weather?q=' + /*inputValue.value*/ inputValue + '&units=metric&lang=' + lang + '&appid=' + apiKey))
     .then(response => response.json())
@@ -82,6 +65,7 @@ function checkwthr(){
 
     .then(response => {0})
 
+    //CURRENT AIR QUALITY
     //OH MY GOD THIS IS WORKING
     getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/air_pollution?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
       .then(response => response.json())
@@ -95,5 +79,26 @@ function checkwthr(){
         pm25.innerHTML = pm25Val;
       })
 
-  .catch(err => alert('"' + inputValue.value + '" is not a valid city name'))
+      .catch(err => alert('"' + inputValue.value + '" is not a valid city name'))
+
+      .then(response => {0})
+};
+
+function getForecast(){
+  getApiKey().then(apiKey => fetch('http://api.openweathermap.org/data/2.5/forecast?lat=' + lati + '&lon=' + long + '&units=metric&appid=' + apiKey))
+      .then(response => response.json())
+      .then(data => {
+        //generate the table
+        forecTableStagedContent += "<table>";
+        for(i = 0; i < 40; i++){
+          //generate the table row
+          forecTableStagedContent += "<tr>";
+          forecTableStagedContent += "<td>" + data['list'][i]['dt_txt'] + "</td>";
+          forecTableStagedContent += "<td>" + data['list'][i]['weather'][0]['icon'] + "</td>";
+          forecTableStagedContent += "<td>" + data['list'][i]['main']['temp'] + "</td>";
+          forecTableStagedContent += "</tr>";
+        }
+        forecTableStagedContent.innerHTML += "</table>";
+        forecTable.innerHTML = forecTableStagedContent;
+      })
 }
