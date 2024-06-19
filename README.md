@@ -1,3 +1,8 @@
+> [!CAUTION]
+> This repository is no longer in development. I have created a new weather app with a new UI. You can see it [here](https://github.com/Qubi-B/WeatherPro)
+
+<hr>
+
 # A PWA weather app (work-in-progress)
 ## Introduction
 <table>
